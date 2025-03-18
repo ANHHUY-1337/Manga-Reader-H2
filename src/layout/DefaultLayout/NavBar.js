@@ -1,27 +1,97 @@
 import { NavLink } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
-import logo from "/Users/hoala/OneDrive/Desktop/2025/mangareaderh2/mangareaderh2/src/assets/mangareder.png";
+import logo from "../../assets/mangareder.png";
 import Context from "../../state/Context";
 
 function NavBar() {
     const { theme, setTheme } = useContext(Context)
+    const [searchQuery, setSearchQuery] = useState("")
+    const [showMobileSearch, setShowMobileSearch] = useState(false)
+
+    const handleSearch = (e) => {
+        e.preventDefault()
+        if (searchQuery.trim()) {
+            window.location.href = `/search/${searchQuery.trim()}`
+            setShowMobileSearch(false)
+        }
+    }
 
     return (
         <div className="flex items-center justify-between sticky top-0 left-0 right-0 h-[60px] bg-[#fff] text-[#000] z-[999] lg:px-[32px] md:px-[23px] px-[16px] border-b border-slate-900/10 dark:bg-[#282828] dark:border-[#cccccc5b]">
             <div className="flex gap-[12px] items-center">
-                    <NavLink className={'flex-shrink-0 w-[40px] h-[40px] rounded-[8px] overflow-hidden'} to='/'>
-                        <img src={logo} alt="logo"/>
-                    </NavLink>
+                <NavLink className={'flex-shrink-0 w-[40px] h-[40px] rounded-[8px] overflow-hidden'} to='/'>
+                    <img src={logo} alt="logo"/>
+                </NavLink>
                 <NavLink to='/' className="lg:text-2xl mobile:text-xl text-[#10b981] font-[900]">
                     H2 IHutech
                 </NavLink>
             </div>
+            
+            <div className="hidden md:flex flex-1 max-w-[500px] mx-4">
+                <form onSubmit={handleSearch} className="flex w-full relative">
+                    <input
+                        type="text"
+                        placeholder="Tìm kiếm manga..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="w-full py-2 px-4 pr-10 rounded-full bg-[#e8ebed] dark:bg-[rgba(204,204,204,0.2)] text-[#000] dark:text-[#fff] focus:outline-none focus:ring-2 focus:ring-[#10b981]"
+                    />
+                    <button 
+                        type="submit"
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#10b981]"
+                    >
+                        <i className="fa-solid fa-search"></i>
+                    </button>
+                </form>
+            </div>
+
             <div className="flex gap-[12px] items-center">
+                <div className="md:hidden">
+                    <button 
+                        onClick={() => setShowMobileSearch(true)} 
+                        className="w-[30px] h-[30px] flex items-center justify-center text-[#000] dark:text-[#fff]"
+                    >
+                        <i className="fa-solid fa-search"></i>
+                    </button>
+                </div>
                 {theme === 'light' ?
                     <Light setTheme={setTheme} /> :
                     <Dark setTheme={setTheme} />}
             </div>
+
+            {/* Mobile Search Popup */}
+            {showMobileSearch && (
+                <div className="fixed inset-0 bg-[rgba(0,0,0,0.4)] flex items-start justify-center pt-20 z-[9999] md:hidden">
+                    <div className="relative bg-[#fff] dark:bg-[#282828] w-full max-w-[90%] mx-[16px] rounded-[8px] p-[16px]">
+                        <div className="absolute top-[12px] right-[12px]">
+                            <button 
+                                onClick={() => setShowMobileSearch(false)} 
+                                className="text-[#000] dark:text-[#fff]"
+                            >
+                                <i className="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                        <h3 className="text-xl font-[600] mb-[16px] text-[#000] dark:text-[#fff]">Tìm kiếm manga</h3>
+                        <form onSubmit={handleSearch} className="flex w-full relative">
+                            <input
+                                type="text"
+                                placeholder="Nhập tên manga..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                className="w-full py-2 px-4 pr-10 rounded-full bg-[#e8ebed] dark:bg-[rgba(204,204,204,0.2)] text-[#000] dark:text-[#fff] focus:outline-none focus:ring-2 focus:ring-[#10b981]"
+                                autoFocus
+                            />
+                            <button 
+                                type="submit"
+                                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#10b981]"
+                            >
+                                <i className="fa-solid fa-search"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

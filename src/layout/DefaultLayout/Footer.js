@@ -1,5 +1,5 @@
-import logo from "/Users/hoala/OneDrive/Desktop/2025/mangareaderh2/mangareaderh2/src/assets/mangareder.png";
 
+import logo from "../../assets/mangareder.png";
 function Footer() {
     return (
         <div className='mt-[64px] bg-[#3f3f3f] lg:p-[32px] mobile:px-[16px] mobile:py-[48px]'>
