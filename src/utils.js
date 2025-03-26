@@ -1,4 +1,4 @@
-export default {
+const utils = {
     get(key, type) {
         return JSON.parse(localStorage.getItem(key)) || type
     },
@@ -6,6 +6,21 @@ export default {
         return localStorage.setItem(key, JSON.stringify(data))
     }
 }
+
+// {
+//     "comic-storage": {
+//         "user@example.com": [/* archived comics */]
+//     },
+//     "history-storage": {
+//         "user@example.com": {/* reading history */}
+//     },
+//     "recent-activity": {
+//         "user@example.com": [/* recent activities */]
+//     },
+//     "theme": "light" // or "dark"
+// }
+
+export default utils
 
 export function formatDate(isoString) {
     const date = new Date(isoString);
@@ -53,7 +68,7 @@ export function scrollToBottom() {
 
 export function isUrlWithValidDomainSuffix(url) {
     const urlPattern =
-        /^(http|https):\/\/[^\/]*\.(com|vn|org|net|edu|gov|mil|app|shop|blog|tech|online|io|co|ai|xyz)(\/.*)?$/i;
+        /^(http|https):\/\[^\/]*\.(com|vn|org|net|edu|gov|mil|app|shop|blog|tech|online|io|co|ai|xyz)(\/.*)?$/i;
     return urlPattern.test(url)
 }
 

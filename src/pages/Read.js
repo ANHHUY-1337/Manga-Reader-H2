@@ -14,7 +14,7 @@ import Context from "../state/Context";
 import { comic, comicImage } from "../api";
 
 function Read() {
-  const { setQuantityComicHistory, width, isLogin, user } = useContext(Context);
+  const { setQuantityComicHistory, width, user } = useContext(Context);
   const navigate = useNavigate();
   const params = useParams();
   const [data] = useFetch(`${comic}/${params?.slug}`);

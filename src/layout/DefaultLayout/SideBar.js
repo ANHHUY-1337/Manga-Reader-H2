@@ -41,14 +41,14 @@ function SideBar() {
                         <span className="text-xs font-[500]">Trang chủ</span>
                     </NavLink>
                 </li>
-                <li>
+                {/* <li>
                     <NavLink
                         to='/detail/danh-sach/truyen-moi'
                         className={({ isActive }) => `flex flex-col items-center justify-center w-[80px] h-[80px] gap-[8px] select-none rounded-[16px] hover:bg-[#e8ebed] dark:hover:bg-[rgba(204,204,204,0.2)] dark:hover:text-[#fff] ${pathname === '/detail/danh-sach/truyen-moi' ? 'bg-[#e8ebed] dark:bg-[rgba(204,204,204,0.2)] dark:text-[#fff]' : 'bg-[#fff] dark:bg-transparent dark:text-[#fff]'}`}>
                         <i className="text-[20px] fa-solid fa-rotate"></i>
                         <span className="text-xs font-[500]">Mới nhất</span>
                     </NavLink>
-                </li>
+                </li> */}
                 <li className="relative">
                     <NavLink
                         to='/archive'
@@ -76,14 +76,14 @@ function SideBar() {
                         </div>}
                 </li>
                 <li>
-                    <button 
+                    {/* <button 
                         onClick={handleCategoryClick}
                         className='flex flex-col items-center justify-center w-[80px] h-[80px] rounded-[16px] overflow-hidden hover:bg-[#e8ebed] dark:hover:bg-[rgba(204,204,204,0.2)] dark:hover:text-[#fff] select-none bg-[#fff] dark:bg-transparent dark:text-[#fff] gap-[8px] cursor-pointer'
                         aria-label="Open categories"
                     >
                         <i className="text-[20px] fa-solid fa-table-cells-large"></i>
                         <span className="text-xs font-[500]">Thể loại</span>
-                    </button>
+                    </button> */}
                 </li>
             </ul>
             
